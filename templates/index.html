@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+
+<div class="jumbotron">
+  <h1 class="display-4">CS50 Flashcards</h1>
+  <p class="lead">A web application where users can create, review, and delete flashcards using a simple "spaced repetition" algorithm.</p>
+  <hr class="my-4">
+  <p><b>What can the app do? </b>Along with creating, reviewing, and deleting cards, users will also be able to review their statistics 
+  on both a general and card-by-card level.  Users logged in under a "teacher" account can assign cards to all student accounts, and review all students' progress.</p>
+
+  <p><b>What tools were used to make the app?</b> The project uses Python (Flask) on the backend; Javascript, HTML, and CSS on the frontend; and an SQLite database to store the data. 
+
+<p><b>How do I use it?</b> To begin, you can simply click on "Create a New Card." Once you have created a few flashcards, you can click on "Review Cards" to review your flashcards.
+Finally, after you've done both of these things, you can can click on "My Stats" to see how you've performed so far.</p>
+
+<p><b>Additional Teacher Tools:</b> If (and only if!) you are logged in as a teacher, you can also click on the "Teacher Tools" dropdown menu. Here, 
+you can choose to review the statistics for student accounts. You can also share cards that you have created with students.</p>
+</div>
+
+<a href="/review"><button type="button" class="btn btn-primary">
+  Cards due for review <span class="badge badge-light">{{cards_due}}</span>
+</button></a>
+
+
+{% endblock %}

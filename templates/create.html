@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create a New Flashcard
+{% endblock %}
+
+{% block main %}
+    <h1>Create a New Flashcard</h1>
+    <form action="/create" method="post" onsubmit="return checkQA()">
+        <div class="form-group">
+            <textarea class="form-control" name="question" id="question" placeholder="question" type="text" rows="1" cols="100"></textarea>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" name="answer" id="answer" placeholder="answer" type="text" rows="4" cols="100"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Add Flash Card</button>
+    </form>
+    
+    
+    <script>
+    //Checks to make sure both question and answer are non-empty
+    function checkQA()
+    {
+        if(document.querySelector("#question").value=="")
+        {
+            alert("Please enter a question.");
+            return false;
+        }
+        
+        if(document.querySelector("#answer").value=="")
+        {
+            alert("Please enter an answer.");
+            return false;
+        }
+    }
+</script>
+{% endblock %}
+

@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create An Account
+{% endblock %}
+
+{% block main %}
+    <h1>Create an Account</h1>
+    Your password must contain at least one (a) letter, (b) number and (c) special character.
+    <form action="/register" onsubmit="return check_me()" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" id="password" placeholder="Password" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password2" id="password2" placeholder="repeat password" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="email" id="email" placeholder="email address" type="email">
+        </div>
+        
+        I am a:<br>
+        <input type="radio" name="role" value="student">
+        <label for="student">Student</label><br>
+        <input type="radio" name="role" value="teacher">
+        <label for="teacher">Teacher</label><br>
+        
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+    
+    <script>
+        // Checks and validates user input
+        function check_me()
+        {
+            var password = document.querySelector("#password").value;
+            // Check that passwords match
+            if(password != document.querySelector("#password2").value)
+            {
+                alert("Passwords don't match.");
+                return false;
+            }
+            
+            // Check that passowrd contains at least one letter, number, and special character. Uses Javascript regular expressions.
+            const hasLetter = /[A-Za-z]/;
+            const hasNumber = /[0-9]/;
+            const hasSpecial = /\W/;
+            
+            if(!hasLetter.test(password) || !hasNumber.test(password) || !hasSpecial.test(password))
+            {
+                alert("Password must contain a letter, number, and special character.");
+                return false;
+            }
+            
+            // Make sure user has selected a role (teacher or student).
+            let roles = document.querySelectorAll('input[name="role"]');
+            let button_checked = false;
+            for (var role of roles)
+            {
+                if(role.checked){
+                    button_checked = true;
+                }
+            }
+            if (button_checked == false)
+            {
+                alert("Please select a role: student or teacher.");
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

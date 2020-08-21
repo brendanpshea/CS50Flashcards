@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Student Statistics
+{% endblock %}
+
+{% block main %}
+
+{% if is_teacher %}
+    <h1>Student Statistics</h1>
+    
+    <table class="table">
+        <tr>
+            <th>Student username</th>
+            <th>Email</th>
+            <th>Reviews Completed</th>
+            <th>Percent Correct</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.username }}</td>
+            <td><a href = "mailto: {{ student.email }}">{{ student.email }}</a></td>
+            <td>{{ student.total_reviews}}</td>
+            <td>{{ student.percent_correct }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% else %}
+    <p>I'm sorry, but you don't have permission to view this page.</p>
+    <p>Go back <a href="/">home</a>.</p>
+
+{% endif %}
+
+{% endblock %}

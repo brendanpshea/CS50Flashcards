@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+   My Statistics
+{% endblock %}
+
+{% block main %}
+<h1>Overall Statistics</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Total cards in deck</th>
+        <td>{{ total_cards }}</td>
+    </tr>
+    <tr>
+        <th>Total reviews completed</th>
+        <td>{{ total_reviews }}</td>
+    </tr>
+    <tr>
+        <th>Total percent of reviews correct</th>
+        <td>{{ percent_correct }}%</td>
+    </tr>
+    <tr>
+        <th>Reviews due within 24 hours</th>
+        <td>{{ due_tomorrow }}</td>
+    </tr>
+</table>
+
+<br>
+<h2>Performance by card</h2>
+
+<table class="table table-striped">
+<tr>
+    <th>Card ID</th>
+    <th>Question</th>
+    <th>Times Correct</th>
+    <th>Times Incorrect</th>
+</tr>
+{% for card in cards %}
+<tr>
+    <td>{{ card.id }}</td>
+    <td>{{ card.question | truncate(50) }}</td>
+    <td>{{ card.correct }}</td>
+    <td>{{ card.incorrect }}</td>
+</tr>
+{% endfor %}
+</table>
+<br>
+
+
+{% endblock %}

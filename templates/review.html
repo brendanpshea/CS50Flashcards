@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Review Flashcards
+{% endblock %}
+
+
+{% block main %}
+<style>
+    #a 
+    {
+        display: none;
+    }
+    #more_buttons
+    {
+        display: none;
+    }
+</style>
+<script>
+    function showAnswer()
+    {
+        document.getElementById("a").style.display = "block";
+        document.getElementById("answer_button").style.display = "none";
+        document.getElementById("more_buttons").style.display = "block";
+    }
+    
+  
+</script>
+
+        {% if nocards %}
+            <p>There are no cards left to review.</p>
+            <a href="/">Go back home.</a>
+        {% else %}
+            <p id="q" style="font-size:30px">Question: {{card.question}}</p>
+            <button class="btn btn-primary" id="answer_button" onclick="showAnswer()">Click to see answer.</button>
+            <p id="a" style="font-size:30px">Answer: {{card.answer}}</p>
+
+            <form id="more_buttons" action="/review" method="POST">
+                <button class="btn btn-success" type="submit" name="user_answer" value="correct">I got it right!</button>
+                <button class="btn btn-danger" type="submit" name="user_answer" value="incorrect">I got it wrong!</button>
+                <input type="hidden" name="question_id" value="{{card.id}}"/>
+            </form>
+            <form action="/review" method="POST" onsubmit="return confirm('Do you really want to delete this card?')">
+                <button class="btn btn-dark" type="submit" name="user_answer" value="delete">Delete this card</button>
+                <input type="hidden" name="question_id" value="{{card.id}}"/>
+            </form>
+        {% endif %}
+
+
+
+
+{% endblock %}

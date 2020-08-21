@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Share Cards With Students
+{% endblock %}
+
+{% block main %}
+
+{% if is_teacher %}
+    <h1>Share My Cards With Students</h1>
+    <p>Select the cards you would like to share with your students from the following list. If the student
+    already has a card with an identical question, their card will not be 
+    overwritten (and your new card will not be added to their deck). Once a card has been shared
+    with a student, it is *their* card. (So, for example, they will retain this card even if
+    you choose to delete the card from your own account). </p>
+    
+    <form action="/teacher_cards" method="post">
+        <div class="form-group">
+            {% for card in cards %}
+                <input type="checkbox" class="form-check-input" name="cards_selected"  id = "{{ card.id }}" value="{{ card.id }}">
+                <label class="form-check-label" for="{{ card.id }}"> {{ card.question }}</label><br>
+            {% endfor %}
+        </div>
+        <button class="btn btn-primary" type="submit">Share selected cards with students.</button>
+    </form>
+
+
+
+{% else %}
+    <p>I'm sorry, but you don't have permission to view this page.</p>
+    <p>Go back <a href="/">home</a>.</p>
+
+{% endif %}
+
+{% endblock %}
